@@ -1,16 +1,16 @@
 import './App.css';
+import { data } from './data'
+import React, {useState} from 'react';
+import { useForm } from "react-hook-form";
 
 function App() {
-  const category1 = [
-    {
-      id: '1628146945244',
-      title: "WiFi"
-    },
-    {
-      id: '1628146945255',
-      title: "Air Condition"
-    }
-  ];
+ const [category, setCategory] = useState(data);
+ const { register, handleSubmit, setFocus, formState: { errors } } = useForm();
+ const onSubmit = (data) => {
+   if(data.title){
+     alert('Nice');
+   }
+ }
   return (
     <div className="flex h-screen">
       <div className="m-auto w-6/12 pricing">
@@ -20,12 +20,16 @@ function App() {
             <input type="text" className="w-full bg-gray-100 border-2 rounded-sm h-9 mb-6" />
             <div className="w-full flex mb-2">
               <label for="title" className="w-1/5 text-xl items-center">Add item</label>
-              <input type="text" className="w-3/5 bg-gray-100 border-2 rounded-sm h-9 mr-3" />
+              <input
+               type="text" 
+               className="w-3/5 bg-gray-100 border-2 rounded-sm h-9 mr-3"
+               {...register('listItem', {required: 'Empty input'})} />
+               {errors.listItem && <p className="text-red-900 text-xs bold">{errors.listItem.message}</p>}
               <button className="w-1/5 ml-1 border-2 rounded-md border-green-900 text-green-900 font-bold">Add</button>
             </div>
 
             {
-              category1.map(item => {
+              category.map(item => {
                 const {id, title} = item;
                 return (
                   <div className="w-full flex">
