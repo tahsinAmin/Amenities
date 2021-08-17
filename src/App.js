@@ -16,6 +16,9 @@ function App() {
       alert('Null');
     }
   }
+  const removeItem = (id) => {
+    setList(list.filter(item => item.id !== id)) 
+  }
 //  const [category, setCategory] = useState(data);
 //  const { register, handleSubmit, setFocus, formState: { errors } } = useForm();
 //  const onSubmit = (data) => {
@@ -29,7 +32,7 @@ function App() {
     <div className="flex h-screen">
       <div className="m-auto w-6/12 pricing">
         <div className="title-input w-full flex ">
-          <label for="title" className="w-1/6 text-xl text-right pr-4">Title</label>
+          <label htmlFor="title" className="w-1/6 text-xl text-right pr-4">Title</label>
           <div className="w-5/6">
             <div>
               <input type="text"
@@ -42,7 +45,7 @@ function App() {
                className="w-full flex mb-2" 
                onSubmit={handleSubmit}
               >
-                <label for="listItem" className="w-1/5 text-xl items-center">
+                <label htmlFor="listItem" className="w-1/5 text-xl items-center">
                   Add item
                 </label>
                 <input
@@ -66,7 +69,7 @@ function App() {
                       </div>
                       <div className="w-5/6 p-4 flex justify-between">
                         <div className="text-gray-500" key={id}>{name}</div>
-                        <button>
+                        <button type="button" onClick={() => removeItem(id)}>
                           <img src="./images/x.svg" alt="Kiwi standing on oval border-2" />
                         </button>
                       </div>
